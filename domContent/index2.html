@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', ()=>{
+            const divA = document.querySelector('#first')
+            const divB = document.querySelector('#second')
+
+            const h1 = document.createElement('h1')
+            h1.textContent = '이동하는 h1 태크'
+            
+            const toFirst = () => {
+                divA.appendChild(h1)
+                setTimeout(toSecond, 1000)
+            }
+
+            const toSecond = () =>{
+                divB.appendChild(h1)
+                setTimeout(toFirst, 2000)
+            }
+
+            toFirst();
+
+            setTimeout(()=>{
+                const h2 = document.querySelector('h2')
+                h2.parentNode.removeChild(h2)
+            }, 10000)
+
+            let counter = 0
+            let eventC = false;
+            const divC = document.querySelector('#clickBox')
+            const btnOn = document.querySelector('#eventOn')
+            const btnOff = document.querySelector('#eventOff')
+            const clickCount = document.querySelector('#clickCount')
+            
+            const addC = (event) => {
+                clickCount.textContent = `클릭한 횟수 : ${counter++}`
+            }
+            btnOn.addEventListener('click', ()=>{
+                if(eventC === false){
+                    eventC = true
+                    clickCount.addEventListener('click', addC)
+                    document.querySelector('p').textContent = '이벤트 연결 상태 : 설정'
+                }
+            })
+
+            btnOff.addEventListener('click', ()=>{
+                if(eventC === true){
+                    eventC = false
+                    clickCount.removeEventListener('click', addC)
+                    document.querySelector('p').textContent = '이벤트 연결 상태 : 해제'
+                }
+            })
+        })
+    </script>
+    <style>
+        #clickBox{
+            /* 글자가 선택 되는 걸 방지 */
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="first">
+        <h1>첫번째 div 태그</h1>
+    </div>
+    <hr/>
+    <div id="second">
+        <h1>두번째 div 태그</h1>
+    </div>
+    <hr/>
+    <h2>곧 사라질 태그</h2>
+    <hr/>
+    <div id="clickBox">
+        <h1 id="clickCount">클릭한 횟수 : 0</h1>
+        <button id="eventOn">이벤트연결</button>
+        <button id="eventOff">이벤트제거</button>
+        <p>이벤트 연결 상태 : 해제</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // document.addEventListener('DOMContentLoaded', ()=>{
+        //     const h1 = (text)=>`<h1>${text}</h1>`;
+        //     document.body.innerHTML += h1('DOMContentLoaded 이벤트 발생');
+        // });
+
+        // document.onload = function(){
+        //     console.log('onload 이벤트 발생');
+        // };
+
+        // document.addEventListener('load', function(){
+        //     console.log('load addEventListener로 이벤트 발생');
+        // });
+
+        document.addEventListener('DOMContentLoaded', ()=>{
+            //배열이 아닌 하나의 변수
+            const header = document.querySelector('h1');
+
+            header.textContent = 'HEADERS'
+            header.style.color = 'white'
+            header.style.backgroundColor = 'black'
+            header.style.padding = '10px'
+
+            header.setAttribute('data-custom', '사용자 정의 속성')
+            //appendChild를 이용하면 제일 아래에 생성이 된다.
+            document.body.appendChild(header)
+
+            //배열
+            const sections = document.querySelectorAll('h2');
+            
+            sections.forEach((section) => {
+                section.textContent = 'section'
+                section.style.color = 'blue'
+                section.style.backgroundColor = 'red'
+                section.style.padding = '10px'
+            });
+
+            //innerHTML과 textContent의 차이
+            const innerH = document.querySelector('#innerH');
+            const innerC = document.querySelector('#innerC');
+            //innerHTML은 태그를 지켜서 출력, textContent는 글자 그대로 출력
+            innerH.innerHTML = '<h1>innerHTML입니다.</h1>';
+            innerC.textContent = '<h1>textContent입니다.</h1>';
+
+            const rects = document.querySelectorAll('.rect');
+
+            rects.forEach((rect, index) => {
+                const width = (index+1) * 100
+                const src = `http://placekitten.com/${width}/250`
+                rect.src = src
+                // rect.getAttribute('src', src)
+            })
+        });
+    </script>
+</head>
+<body>
+    <h1></h1>
+    <h2></h2>
+    <h2></h2>
+    <h2></h2>
+    <h2></h2>
+
+    <div id="innerH"></div>
+    <div id="innerC"></div>
+
+    <img class="rect" />
+    <img class="rect" />
+    <img class="rect" />
+    <img class="rect" />
+</body>
+</html>
