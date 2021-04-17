@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 class="allText">공백 포함 글자 수 : 0</h1>
+    <h1 class="noSpaceText">공백 미포함 글자 수 : 0</h1>
+    <textarea placeholder="글자를 입력하여 주세요." style="width: 800px; height: 300px;"></textarea>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', ()=>{
+            const textarea = document.querySelector('textarea');
+            const allText = document.querySelector('.allText');
+            const noSpaceText = document.querySelector('.noSpaceText');
+
+            textarea.addEventListener('keyup', (event)=>{
+                const lenght = textarea.value.length;
+                const noSpaceLenght = textarea.value.replace(/(\s*)/g, "").length;
+                allText.textContent = `공백 포함 글자 수 : ${lenght}`;
+                noSpaceText.textContent = `공백 미포함 글자 수 : ${noSpaceLenght}`;
+            });
+        })
+    </script>
+
+</body>
+</html>
