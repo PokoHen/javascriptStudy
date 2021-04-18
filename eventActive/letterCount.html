@@ -7,9 +7,18 @@
     <title>Document</title>
 </head>
 <body>
+
     <h1 class="allText">공백 포함 글자 수 : 0</h1>
     <h1 class="noSpaceText">공백 미포함 글자 수 : 0</h1>
     <textarea placeholder="글자를 입력하여 주세요." style="width: 800px; height: 300px;"></textarea>
+
+    <hr/>
+
+    <h2></h2>
+
+    <hr/>
+
+    <h3>*</h3>
 
     <script>
         document.addEventListener('DOMContentLoaded', ()=>{
@@ -23,6 +32,53 @@
                 allText.textContent = `공백 포함 글자 수 : ${lenght}`;
                 noSpaceText.textContent = `공백 미포함 글자 수 : ${noSpaceLenght}`;
             });
+
+            const h2 = document.querySelector('h2');
+            const print = (event) => {
+                let output = '';
+                output += `alt: ${event.altKey}<br/>`;
+                output += `ctrl: ${event.ctrlKey}<br/>`;
+                output += `shift: ${event.shiftKey}<br/>`;
+                output += `code: ${typeof(event.code) !== 'undefined'? event.code : event.keyCode}<br/>`;
+                h2.innerHTML = output;
+            }
+
+            document.addEventListener('keydown', print);
+            document.addEventListener('keyup', print);
+
+            //키코드를 이용한 별 움직이기
+
+            const star = document.querySelector('h3');
+            star.style.position = 'absolute';
+            star.style.zIndex = 99;
+            star.style.fontSize = '50px';
+
+            let [x, y] = [0, 0];
+            const block = 20;
+            const printStar = () => {
+                star.style.left = `${x * block}px`;
+                star.style.top = `${y * block}px`;
+            }
+
+            //별 이동 구간
+            const [left, up, right, down] = [37, 38, 39, 40]
+            document.body.addEventListener('keydown',(event)=>{
+                switch(event.keyCode){
+                    case left:
+                        x -= 1;
+                        break;
+                    case up:
+                        y -= 1;
+                        break;
+                    case right:
+                        x += 1;
+                        break;
+                    case down:
+                        y += 1;
+                        break;
+                }
+                printStar();
+            })
         })
     </script>
 

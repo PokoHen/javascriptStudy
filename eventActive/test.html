@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" class="firstText">
+    <select name="beforeSelect">
+        <option value="1">cm</option>
+        <option value="0.1">m</option>
+        <option value="10">mm</option>
+        <option value="0.393701">inch</option>
+    </select>
+    =><span></span>
+    <select name="afterSelect">
+        <option value="1">cm</option>
+        <option value="0.1">m</option>
+        <option value="10">mm</option>
+        <option value="0.393701">inch</option>
+    </select>
+
+    <script>
+        let [value, before_value, after_value] = [0, 1, 1];
+
+        const firstText = document.querySelector('.firstText');
+        const span = document.querySelector('span');
+        const before_select = document.querySelector('select[name=beforeSelect]');
+        const after_select = document.querySelector('select[name=afterSelect]');
+
+        const calculate = function(){
+            span.textContent = `${(value * (after_value / before_value)).toFixed(2)}`;
+        }
+
+        firstText.addEventListener('keyup', (event)=>{
+            value = event.currentTarget.value;
+            calculate();
+        });
+
+        before_select.addEventListener('change', (event)=>{
+            const options = event.currentTarget.options;
+            const index = event.currentTarget.options.selectedIndex;
+
+            before_value = Number(options[index].value);
+            calculate();
+        });
+
+        after_select.addEventListener('change', (event)=>{
+            const options = event.currentTarget.options;
+            const index = event.currentTarget.options.selectedIndex;
+
+            after_value = Number(options[index].value);
+            calculate();
+        });
+
+    </script>
+
+</body>
+</html>

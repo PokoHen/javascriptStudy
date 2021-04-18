@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <input type="text">
+    <select name="unit" id="typeText">
+        <option value="inch">inch</option>
+        <option value="ft">ft</option>
+        <option value="yd">yd</option>
+        <option value="mm">mm</option>
+    </select>
+    <br/>
+    <button>계산</button>
+    <p></p>
+
+    <hr/>
+
+    <select name="menu" id="bookSelect">
+        <option>-----</option>
+        <option>떡볶이</option>
+        <option>김밥</option>
+        <option>오뎅</option>
+        <option>튀김</option>
+    </select>
+    <h1>선택:</h1>
+
+    <hr/>
+
+    복수 선택
+    <select class="multupleSelect" multiple>
+        <option>떡볶이</option>
+        <option>순대</option>
+        <option>오뎅</option>
+        <option>튀김</option>
+    </select>
+
+    <h2></h2>
+
+    <hr/>
+
+    <input type="text" class="email">
+    <h3></h3>
+
+    <hr/>
+
+    <input type="text" class="cmText"> cm = <span></span>
+    <select class="inchSelect">
+        <option value="10">mm</option>
+        <option value="0.01">m</option>
+        <option value="0.393701">inch</option>
+    </select>
+
+    <script>
+        document.addEventListener('DOMContentLoaded',()=>{
+            //inch를 cm로 바꾸기
+            const input = document.querySelector('input[type=text]');
+            const button = document.querySelector('button');
+            const p = document.querySelector('p');
+
+            button.addEventListener('click', ()=>{
+                const inputValue = Number(input.value);
+                const typeText = document.querySelector('#typeText').value;
+                let cm = 0;
+
+                if(isNaN(inputValue)){
+                    p.textContent = '숫자가 아닙니다.'
+                    return;
+                }
+
+                switch (typeText){
+                    case 'inch':
+                        cm = inputValue * 2.54;    
+                        break;
+                    case 'ft':
+                        cm = inputValue * 0.0328;
+                        break;
+                    case 'yd':
+                        cm = inputValue * 0.0109;
+                        break;
+                    case 'mm':
+                        cm = inputValue * 10;
+                        break;
+                }
+                
+                p.textContent = `${cm} cm 입니다.`;
+            });
+
+            //책의 select 변경
+            const select = document.querySelector('#bookSelect');
+            const h1 = document.querySelector('h1');
+
+            select.addEventListener('change', (event)=>{
+                //선택한 것의 select 태그를 저장
+                const options = event.currentTarget.options;
+                //선택한 것의 select 태그 안의 옵션을 저장
+                const index = event.currentTarget.options.selectedIndex;
+                
+                h1.textContent = `선택: ${options[index].textContent}`;
+            })
+
+            //multiple select 변경
+            const multipleSelect = document.querySelector('.multupleSelect');
+            const h2 = document.querySelector('h2');
+
+            multipleSelect.addEventListener('change', (event)=>{
+                const options = event.currentTarget.options;
+                const list = [];
+                for (const option of options){
+                    if(option.selected){
+                        list.push(option.textContent);
+                    }
+                }
+
+                h2.textContent = `선택된 항목 : ${list.join(', ')}`;
+            });
+
+            //동기적 변경
+            let now_value;
+            let change_value = 10;
+
+            const inch_select = document.querySelector('.inchSelect');
+            const cm_text = document.querySelector('.cmText');
+            const span = document.querySelector('span');
+
+            const calculate = ()=>{
+                //소숫점 두번째까지 출력
+                span.textContent = (now_value * change_value).toFixed(2);
+            }
+
+            inch_select.addEventListener('change', (event)=>{
+                const option = event.currentTarget.options;
+                const index = event.currentTarget.options.selectedIndex;
+
+                change_value = Number(option[index].value);
+                calculate();
+            });
+
+            cm_text.addEventListener('keyup', (event=>{
+                now_value = Number(event.currentTarget.value);
+                calculate();
+            }));
+
+            //emai 확인
+            const eamilInput = document.querySelector('.email');
+            const h3 = document.querySelector('h3');
+
+            const isEmail = (value)=>{
+                //골뱅이를 가지고 있고 & 그 뒤에 점이 있다면
+                return (value.indexOf('@')>1) && (value.indexOf('.') > value.indexOf('@'));
+            };
+
+            eamilInput.addEventListener('keyup', (event)=>{
+                const value = eamilInput.value;
+                if(isEmail(value)){
+                    h3.style.color = 'green';
+                    h3.textContent = `이메일 형식 입니다. ${value}`;
+                }else{
+                    h3.style.color = 'red';
+                    h3.textContent = `이메일 형식이 올바르지 않습니다. ${value}`;
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
