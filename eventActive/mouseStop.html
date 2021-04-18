@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img src="http://placekitten.com/300/300" alt="" />
+
+    <br/>
+
+    <input type="checkbox" id="linkActive">
+    <label for="linkActive">링크 활성화</label>
+    <br/>
+    <a href="http://hanbit.co.kr" target="_blank">한빛미디어</a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const imgs = document.querySelectorAll('img');
+
+            imgs.forEach((img) => {
+                img.addEventListener('contextmenu', (event) => {
+                    event.preventDefault();
+                    //컨텍스트 메뉴를 출력하는 기본 이벤트를 제거 합니다.
+                    //컨텍스트 메뉴는 마우스 오른쪽 클릭
+                    alert('복사를 방지합니다');
+                })
+            })
+
+            //체크할 때만 링크 활성화
+            let status = false;
+            const checkbox = document.querySelector('[type=checkbox]');
+
+            checkbox.addEventListener('change', (event) =>{
+                status = event.currentTarget.checked;
+            });
+
+            const link = document.querySelector('a');
+            link.addEventListener('click', (event)=>{
+                if(!status){
+                    event.preventDefault();
+                    //링크는 링크를 없애어 준다.
+                }
+            });
+
+        })
+    </script>
+</body>
+</html>
