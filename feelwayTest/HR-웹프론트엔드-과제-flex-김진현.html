@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR-웹프론트엔드-과제-flex-김진현</title>
+    <style>
+        *{margin: 0; padding: 0;}
+        ul, li{ list-style: none; }
+        .wrap{ width: 100%; height: 400px; background-color: orange; padding: 10px; box-sizing: border-box; display: flex;}
+        .inBox{ width: 200px; height: 200px; background-color: #fff; box-sizing: border-box; border: 1px solid black; display: flex; justify-content: center; }
+        .circle{ width: 100px; height: 100px; background-color: orange; border-radius: 50%; font-size: 50px; line-height: 100px; text-align: center; color: white; font-weight: 900; }
+
+        .box1{ justify-content: space-between;}
+        .box1>.inBox{ height: 100%; padding-top: 50px;}
+
+        .box2{ align-items: flex-end;}
+        .box2>.inBox{ align-items: center; margin-right: 10px;}
+        .box2>.inBox:last-child{margin-right: 0;}
+
+        .box3{ height: 700px;  flex-direction: row; flex-wrap : wrap; align-items: center; justify-content: flex-start;}
+        .box3>.inBox{ align-items: center; margin: 10px;}
+    </style>
+</head>
+<body>
+    <ul class="wrap box1">
+        <li class="inBox"><div class="circle">1</div></li>
+        <li class="inBox"><div class="circle">2</div></li>
+        <li class="inBox"><div class="circle">3</div></li>
+        <li class="inBox"><div class="circle">4</div></li>
+        <li class="inBox"><div class="circle">5</div></li>
+    </ul>
+    
+    <br/><br/><br/><br/><br/><br/><br/><br/>
+
+    <ul class="wrap box2">
+        <li class="inBox"><div class="circle">1</div></li>
+        <li class="inBox"><div class="circle">2</div></li>
+        <li class="inBox"><div class="circle">3</div></li>
+        <li class="inBox"><div class="circle">4</div></li>
+        <li class="inBox"><div class="circle">5</div></li>
+    </ul>
+
+    <br/><br/><br/><br/><br/><br/><br/><br/>
+
+    <ul class="wrap box3">
+        <li class="inBox"><div class="circle">1</div></li>
+        <li class="inBox"><div class="circle">2</div></li>
+        <li class="inBox"><div class="circle">3</div></li>
+        <li class="inBox"><div class="circle">4</div></li>
+        <li class="inBox"><div class="circle">5</div></li>
+        <li class="inBox"><div class="circle">6</div></li>
+        <li class="inBox"><div class="circle">7</div></li>
+        <li class="inBox"><div class="circle">8</div></li>
+        <li class="inBox"><div class="circle">9</div></li>
+        <li class="inBox"><div class="circle">10</div></li>
+        <li class="inBox"><div class="circle">11</div></li>
+        <li class="inBox"><div class="circle">12</div></li>
+        <li class="inBox"><div class="circle">13</div></li>
+        <li class="inBox"><div class="circle">14</div></li>
+        <li class="inBox"><div class="circle">15</div></li>
+        <li class="inBox"><div class="circle">16</div></li>
+        <li class="inBox"><div class="circle">17</div></li>
+        <li class="inBox"><div class="circle">18</div></li>
+        <li class="inBox"><div class="circle">19</div></li>
+        <li class="inBox"><div class="circle">20</div></li>
+    </ul>
+
+    <br/><br/><br/><br/><br/><br/><br/><br/>
+
+</body>
+</html>

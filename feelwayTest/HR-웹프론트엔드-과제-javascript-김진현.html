@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{margin: 0; padding: 0;}
+        .wrap{ padding: 10px;}
+        input[type=text]{ width: 50px; cursor: default; }   
+        .startBtn{ width: 50px; text-align: center; }
+        .gugudanBox{ width: fit-content; display: flex; flex-direction: row; align-items: center; margin-top: 10px; padding: 10px; border: 1px solid black; }
+        .danBox{ width: fit-content; height: auto; border: 1px solid black; padding: 10px; margin: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        h1{ display: block; width: 100px; height: auto; padding-left: 5px; margin-bottom: 10px; border: 1px solid black; box-sizing: border-box; }
+        textarea{ width: 100px; height: 180px; padding: 5px; overflow-y: hidden; box-sizing: border-box; resize: none; }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <form class="go" method="GET" action="#">
+            <input type="text" list="dan" class="firstDan" /><span>단 부터 </span>
+            <input type="text" list="dan" class="lastDan" /><span>까지 보고 싶어요. </span>
+            <input type="submit" value="시작" class="startBtn" />
+        </form>
+        <div id="textBox"></div>
+
+        <datalist id="dan">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+        </datalist>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded',()=>{
+            const firstDan = document.querySelector('.firstDan');
+            const lastDan = document.querySelector('.lastDan');
+            const gugudanBox = document.querySelector('#textBox');
+            const startBtn = document.querySelector('.startBtn');
+            const maxNum = 9;
+            let boxNum = 0;
+
+            startBtn.addEventListener('click', () => {
+                
+                if(gugudanBox.hasChildNodes()){
+                    const gugudanChild = document.querySelectorAll('.danBox')
+                    gugudanChild.forEach((gugudanlist)=>{
+                        gugudanlist.remove();
+                    })
+                }
+
+                let firstDanNum = Number(firstDan.value);
+                let lastDanNum = Number(lastDan.value);
+                gugudanBox.setAttribute('class', 'gugudanBox');
+
+                if( firstDanNum > lastDanNum ){
+                    alert('작은 수부터 적어주세요.');
+                    gugudanBox.removeAttribute('class');
+                    return;
+                }
+
+                //문서 설정
+
+                for(let i = firstDanNum; i <= lastDanNum; i++ ){
+
+                    const item = document.createElement('div');
+                    item.setAttribute('class', 'danBox');
+                    
+                    const danTitle = document.createElement('h1');
+                    const gugudan = document.createElement('textarea');
+                    gugudan.setAttribute('readonly', 'readonly')
+
+                    for(let j = 1; j < 10; j++){
+                        gugudan.value += (`${i} X ${j} = ${(i*j)} \n`);
+                    }
+
+                    danTitle.textContent = `${i}단`;
+                    item.appendChild(danTitle);
+                    item.appendChild(gugudan);
+                    gugudanBox.appendChild(item);
+                }
+
+            });
+            
+        });
+    </script>
+</body>
+</html>
