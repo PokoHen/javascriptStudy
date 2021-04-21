@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Rectangle{
+            #width;
+            #height;
+
+            constructor (width, height){
+                this.setWidth(width);
+                this.setHeigh(height);
+            }
+
+            setWidth(width){
+                if(width <= 0){
+                    throw '길이는 0보다 커야합니다.'
+                }
+                this.#width = width;
+            }
+
+            setHeigh(height){
+                if(height <= 0){
+                    throw '길이는 0보다 커아합니다.'
+                }
+                this.#height = height;
+            }
+
+            getWidth(width){
+                return this.#width;
+            }
+
+            getHeight(height){
+                return this.#height;
+            }
+
+            //둘레 구하기
+            getPerimeter(){
+                return 2*(this.#width + this.#height);
+            }
+
+            //넓이 구하기
+            getArea(){
+                return this.#width*this.#height;
+            }
+        }
+
+        class Square extends Rectangle{
+            
+            #length;
+
+            static #counter = 0;
+            static get counter(){
+                return Square.#counter;
+            }
+            
+            constructor(length){
+                super(length, length);
+                this.length = length;
+                Square.#counter += 1;
+            }
+
+            // setLength(length){
+            //     if(length <= 0){
+            //         throw '길이는 0보다 커야합니다.';
+            //     }
+            //     this.#length = length;
+            // }
+
+            set length(length){
+                if(length <= 0){
+                    throw '길이는 0보다 커야합니다.';
+                }
+                this.#length = length;
+            }
+
+            // getLenght(length){
+            //     return this.#length
+            // }
+
+            get length(){
+                return this.#length;
+            }
+
+            static perimeterOf(length){
+                return length * 4;
+            }
+            static areaOf(length){
+                return length ** 2;
+            }
+
+        }
+
+        const rectangle = new Rectangle(10, 20);
+        console.log(`사각형의 둘레: ${rectangle.getPerimeter()}`);
+        console.log(`사각형의 넓이: ${rectangle.getArea()}`);
+
+        const square = new Square(10);
+        console.log(`정사각형의 길이: ${square.length}`);
+        console.log(`정사각형의 둘레: ${square.getPerimeter()}`);
+        console.log(`정사각형의 넓이: ${square.getArea()}`);
+        console.log(`지금까지 만들어진 정사각형의 갯수는 ${Square.counter}개입니다`);
+        console.log(`한 변의 길이가 20인 정사각형 둘레는 ${Square.perimeterOf(20)}입니다`);
+        console.log(`한 변의 길이가 20인 정사각형 넓이는 ${Square.areaOf(20)}입니다`);
+
+    </script>
+</body>
+</html>

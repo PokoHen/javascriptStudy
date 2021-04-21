@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        // const compoent = <h1>리엑트 기본</h1>;
+        // const container = document.getElementById('root');
+
+        // ReactDOM.render(compoent, container);
+
+        const name = '구름';
+        const imgUrl = 'http://placedog.net/400/200';
+
+        //컴포넌트와 컨테이너 생성하기
+
+        // const component = <div>
+        //     <h1>{name}님 안녕하세요</h1>
+        //     <img src={imgUrl} />
+        //     </div>;
+
+        //class 컴포넌트 만들기
+        //props를 이용해서 변수 값을 넣는다
+        // class App extends React.Component {
+            
+        //     render(){
+        //         return <div>
+        //                 <h1>{this.props.name}님 안녕하세요</h1>
+        //                 <img src={this.props.imgUrl} />
+        //             </div>;
+        //     }
+        // }
+        class App extends React.Component {
+            
+            render(){
+                return <div>
+                        <h1>{name}님 안녕하세요</h1>
+                        <img src={imgUrl} />
+                    </div>;
+            }
+        }
+
+        const container = document.getElementById('root');
+
+        //출력하기
+        // ReactDOM.render(component, container);
+        // props를 선언시 임의로 값을 선언할 수 있다.
+        // ReactDOM.render(<App name="구름" imgUrl="http://placedog.net/400/200"/>, container);
+        ReactDOM.render(<App />, container);
+    </script>
+</body>
+</html>
